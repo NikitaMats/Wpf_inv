@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Wpf_inv.Model
 {
-    // Класс для хранения информации о компьютерах
+    // Класс для хранения информации о компьютерах.
     class Computer
     {
-        // Свойства компьютера
+        // Свойства компьютера.
         public string PCName { get; set; }
         public string PCModel { get; set; }
         public string InventoryNumber { get; set; }
@@ -22,7 +22,7 @@ namespace Wpf_inv.Model
         public string InstalledSoftware { get; set; } // Список установленного ПО (например, перечисленный через запятую)
         public Monitor Monitor { get; set; } // Экземпляр класса Monitor
 
-        // Конструктор класса
+        // Конструктор класса.
         public Computer(string pcName, string pcModel, string inventoryNumber, string serialNumber,
                         string ipAddress, int ramSize, int hddSize,
                         string motherboardModel, string cpuModel, string installedSoftware, Monitor monitor)
