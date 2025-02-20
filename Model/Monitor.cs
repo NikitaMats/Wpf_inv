@@ -1,20 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Wpf_inv.Model
 {
-    // Класс для хранения информации о мониторах.
-    class Monitor
+    /// <summary>
+    /// Класс отвечающий за хранение данных о мониторах.
+    /// </summary>
+    internal class Monitor
     {
-        // Свойства модели, инвентаризационного номера и серийного номера монитора.
-        public string Model { get; set; }
-        public string InventoryNumber { get; set; }
-        public string SerialNumber { get; set; }
+        /// <summary>
+        /// Модель монитора.
+        /// </summary>
+        private string _model;
 
-        // Конструктор класса.
+        /// <summary>
+        /// Инвентаризационный номер монитора.
+        /// </summary>
+        private string _inventoryNumber;
+
+        /// <summary>
+        /// Инвентаризационный номер монитора.
+        /// </summary>
+        private string _serialNumber;
+
+        /// <summary>
+        /// Возвращает и задаёт модель монитора.
+        /// </summary>
+        public string Model
+        {
+            get
+            {
+                return _model;
+            }
+            set
+            {
+                _model = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задаёт инвентаризационный номер монитора.
+        /// </summary>
+        public string InventoryNumber
+        {
+            get
+            {
+                return _inventoryNumber;
+            }
+            set
+            {
+                _inventoryNumber = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задаёт серийный номер монитора.
+        /// </summary>
+        public string SerialNumber
+        {
+            get
+            {
+                return _serialNumber;
+            }
+            set
+            {
+                _serialNumber = value;
+            }
+        }
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Monitor"/>.
+        /// </summary>
         public Monitor(string model, string inventoryNumber, string serialNumber)
         {
             Model = model;
