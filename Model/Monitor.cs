@@ -23,7 +23,7 @@ namespace Wpf_inv.Model
         private string _inventoryNumber;
 
         /// <summary>
-        /// Инвентаризационный номер монитора.
+        /// Серийный номер монитора.
         /// </summary>
         private string _serialNumber;
 
