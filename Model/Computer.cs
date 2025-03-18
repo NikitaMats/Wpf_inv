@@ -251,5 +251,10 @@ namespace Wpf_inv.Model
             InstalledSoftware = installedSoftware;
             Monitor = monitor;
         }
+
+        public override string ToString()
+        {
+            return $"{PCName} - {PCModel} (Инв. номер: {InventoryNumber})";
+        }
     }
 }

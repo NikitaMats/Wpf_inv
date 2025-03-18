@@ -1,13 +1,5 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Wpf_inv.Model;
 
 namespace Wpf_inv
@@ -17,7 +9,9 @@ namespace Wpf_inv
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        /// <summary>
+        /// Хранит список устройств.
+        /// </summary>
         private List<Computer> computers = new List<Computer>();
 
         public MainWindow()
@@ -26,16 +20,9 @@ namespace Wpf_inv
         }
 
         /// <summary>
-        /// Öâåò îøèáêè.
+        /// Отвечает за обработку нажатия на кнопку сохранения.
         /// </summary>
-        //private readonly Color _errorColor = Color.LightPink;
-
-        /// <summary>
-        /// Öâåò îêíà áåç îøèáîê.
-        /// </summary>
-        //private readonly Color _normalColor = Color.White;
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void AddEquipmentButton_Click(object sender, RoutedEventArgs e)
         {
             // Считываем данные из полей ввода
             string pcName = PCNameTextBox.Text;
@@ -43,6 +30,7 @@ namespace Wpf_inv
             string inventoryNumber = InventoryNumberTextBox.Text;
             string serialNumber = SerialNumberTextBox.Text;
             string ipAddress = IPAddressTextBox.Text;
+            string cabinet = CabinetNumberTextBox.Text;
             int ramSize;
             int hddSize;
 
@@ -69,6 +57,9 @@ namespace Wpf_inv
             // Добавляем новый компьютер в список
             computers.Add(computer);
 
+            // Добавляем информацию о компьютере в ListBox
+            AllEquipmentListView.Items.Add(computer);
+
             // Очищаем поля ввода после сохранения
             ClearInputFields();
 
@@ -76,6 +67,9 @@ namespace Wpf_inv
             MessageBox.Show("Устройство успешно сохранено!");
         }
 
+        /// <summary>
+        /// Метод отвечающий за очистку текстовых полей.
+        /// </summary>
         private void ClearInputFields()
         {
             // Очищаем или сбрасываем значения в полях ввода
@@ -92,6 +86,75 @@ namespace Wpf_inv
             MonitorModelTextBox.Clear();
             MonitorInventoryNumberTextBox.Clear();
             MonitorSerialNumberTextBox.Clear();
+        }
+
+        private void AllEquipmentListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
+            {
+                PCNameTextBox.Text = selectedComputer.PCName;
+                PCModelTextBox.Text = selectedComputer.PCModel;
+                InventoryNumberTextBox.Text = selectedComputer.InventoryNumber;
+                SerialNumberTextBox.Text = selectedComputer.SerialNumber;
+                IPAddressTextBox.Text = selectedComputer.IPAddress;
+                RAMSizeTextBox.Text = selectedComputer.RAMSize.ToString();
+                HDDSizeTextBox.Text = selectedComputer.HDDSize.ToString();
+                MotherboardModelTextBox.Text = selectedComputer.MotherboardModel;
+                CPUModelTextBox.Text = selectedComputer.CPUModel;
+                InstalledSoftwareTextBox.Text = selectedComputer.InstalledSoftware;
+                MonitorModelTextBox.Text = selectedComputer.Monitor.Model;
+                MonitorInventoryNumberTextBox.Text = selectedComputer.Monitor.InventoryNumber;
+                MonitorSerialNumberTextBox.Text = selectedComputer.Monitor.SerialNumber;
+            }
+        }
+
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Проверяем, выбран ли элемент в ListView
+            if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
+            {
+                // Обновляем свойства выбранного компьютера
+                selectedComputer.PCName = PCNameTextBox.Text;
+                selectedComputer.PCModel = PCModelTextBox.Text;
+                selectedComputer.InventoryNumber = InventoryNumberTextBox.Text;
+                selectedComputer.SerialNumber = SerialNumberTextBox.Text;
+                selectedComputer.IPAddress = IPAddressTextBox.Text;
+                selectedComputer.RAMSize = int.TryParse(RAMSizeTextBox.Text, out int ramSize) ? ramSize : 0;
+                selectedComputer.HDDSize = int.TryParse(HDDSizeTextBox.Text, out int hddSize) ? hddSize : 0;
+                selectedComputer.MotherboardModel = MotherboardModelTextBox.Text;
+                selectedComputer.CPUModel = CPUModelTextBox.Text;
+                selectedComputer.InstalledSoftware = InstalledSoftwareTextBox.Text;
+                selectedComputer.Monitor.Model = MonitorModelTextBox.Text;
+                selectedComputer.Monitor.InventoryNumber = MonitorInventoryNumberTextBox.Text;
+                selectedComputer.Monitor.SerialNumber = MonitorSerialNumberTextBox.Text;
+
+                // Обновляем отображение в ListView
+                AllEquipmentListView.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите компьютер для редактирования.");
+            }
+        }
+
+        private void DeleteEquipmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Проверяем, выбран ли элемент в ListView
+            if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
+            {
+                // Удаляем выбранный компьютер из списка
+                computers.Remove(selectedComputer);
+
+                // Удаляем элемент из ListView
+                AllEquipmentListView.Items.Remove(selectedComputer);
+
+                // Очищаем текстовые поля
+                ClearInputFields();
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите компьютер для удаления.");
+            }
         }
     }
 }
