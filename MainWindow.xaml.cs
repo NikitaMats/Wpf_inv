@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using Wpf_inv.Model;
+using Wpf_inv.Service;
 
 namespace Wpf_inv
 {
@@ -12,11 +14,24 @@ namespace Wpf_inv
         /// <summary>
         /// Хранит список устройств.
         /// </summary>
-        private List<Computer> computers = new List<Computer>();
+        private List<Computer> _computers = new List<Computer>();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            try
+            {
+                _computers = Serializer.LoadData();
+                for (int i = 0; i <= _computers.Count - 1; i++)
+                {
+                    AllEquipmentListView.Items.Add(_computers[i]);
+                }
+            }
+            catch
+            {
+                _computers = new List<Computer>();
+            }
         }
 
         /// <summary>
@@ -31,8 +46,12 @@ namespace Wpf_inv
             string serialNumber = SerialNumberTextBox.Text;
             string ipAddress = IPAddressTextBox.Text;
             string cabinet = CabinetNumberTextBox.Text;
+            string motherboardModel = MotherboardModelTextBox.Text;
+            string cpuModel = CPUModelTextBox.Text;
+            string installedSoftware = InstalledSoftwareTextBox.Text;
             int ramSize;
             int hddSize;
+            Model.Monitor monitor = new Model.Monitor(MonitorModelTextBox.Text, MonitorInventoryNumberTextBox.Text, MonitorSerialNumberTextBox.Text);
 
             // Пробуем преобразовать значение объема оперативной памяти и жесткого диска в целые числа
             if (!int.TryParse(RAMSizeTextBox.Text, out ramSize) || !int.TryParse(HDDSizeTextBox.Text, out hddSize))
@@ -41,21 +60,13 @@ namespace Wpf_inv
                 return;
             }
 
-            string motherboardModel = MotherboardModelTextBox.Text;
-            string cpuModel = CPUModelTextBox.Text;
-            string installedSoftware = InstalledSoftwareTextBox.Text;
-
-            // Создаем экземпляр класса Monitor (предполагается, что номер и модель монитора вы получаете, например, из каких-либо полей)
-            Model.Monitor monitor = new Model.Monitor(MonitorModelTextBox.Text, MonitorInventoryNumberTextBox.Text, MonitorSerialNumberTextBox.Text);
-
-            // Создаем экземпляр класса Computer
             Computer computer = new Computer(pcName, pcModel, inventoryNumber, serialNumber,
                                               ipAddress, ramSize, hddSize,
                                               motherboardModel, cpuModel,
                                               installedSoftware, monitor);
 
             // Добавляем новый компьютер в список
-            computers.Add(computer);
+            _computers.Add(computer);
 
             // Добавляем информацию о компьютере в ListBox
             AllEquipmentListView.Items.Add(computer);
@@ -143,7 +154,7 @@ namespace Wpf_inv
             if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
             {
                 // Удаляем выбранный компьютер из списка
-                computers.Remove(selectedComputer);
+                _computers.Remove(selectedComputer);
 
                 // Удаляем элемент из ListView
                 AllEquipmentListView.Items.Remove(selectedComputer);
@@ -155,6 +166,11 @@ namespace Wpf_inv
             {
                 MessageBox.Show("Пожалуйста, выберите компьютер для удаления.");
             }
+        }
+
+        private void MainForm_FormClosed(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Serializer.WriteData(_computers);
         }
     }
 }
