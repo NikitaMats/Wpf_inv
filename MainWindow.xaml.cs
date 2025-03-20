@@ -150,16 +150,12 @@ namespace Wpf_inv
 
         private void DeleteEquipmentButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, выбран ли элемент в ListView
             if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
             {
-                // Удаляем выбранный компьютер из списка
                 _computers.Remove(selectedComputer);
 
-                // Удаляем элемент из ListView
                 AllEquipmentListView.Items.Remove(selectedComputer);
 
-                // Очищаем текстовые поля
                 ClearInputFields();
             }
             else
@@ -168,6 +164,9 @@ namespace Wpf_inv
             }
         }
 
+        /// <summary>
+        /// Функция срабатывающая при закрытии формы. Отвечает за сохранение данных.
+        /// </summary>
         private void MainForm_FormClosed(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Serializer.WriteData(_computers);

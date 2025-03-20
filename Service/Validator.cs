@@ -23,26 +23,28 @@ namespace Wpf_inv.Service
                     $"The number of characters of the {FunctionName} field must be in the range from {min} to {max}.");
         }
 
+        /// <summary>
+        /// Проверяет строку на соответствие IPv4.
+        /// </summary>
+        /// <param name="ipAddress">Строка.</param>
+        /// <exception cref="ArgumentException">Выбрасывается, когда строка не соответсвует IPv4.</exception>
         public bool IsValidIPv4(string ipAddress)
         {
             if (string.IsNullOrEmpty(ipAddress))
-                return false;
+                throw new ArgumentException("The line must not be empty.");
 
-            // Разделяем строку по точкам
             string[] parts = ipAddress.Split('.');
-            if (parts.Length != 4)
-                return false;
 
-            // Проверяем каждый октет
+            if (parts.Length != 4)
+                throw new ArgumentException("The line does not match IPv4.");
+
             foreach (string part in parts)
             {
-                // Проверяем, что октет — это число
                 if (!int.TryParse(part, out int octet))
-                    return false;
+                    throw new ArgumentException("The line does not match IPv4.");
 
-                // Проверяем диапазон октета
                 if (octet < 0 || octet > 255)
-                    return false;
+                    throw new ArgumentException("The line does not match IPv4.");
             }
 
             return true;
