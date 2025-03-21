@@ -13,6 +13,11 @@ namespace Wpf_inv.Model
     class Computer
     {
         /// <summary>
+        /// Номер кабинета в котором установлен ПК.
+        /// </summary>
+        private int _cabinet;
+
+        /// <summary>
         /// Имя компьютера.
         /// </summary>
         private string _pcName;
@@ -66,6 +71,18 @@ namespace Wpf_inv.Model
         /// Экземпляр класса <see cref="Monitor"/>.
         /// </summary>
         private Monitor _monitor;
+
+        public int Cabinet
+        {
+            get
+            {
+                return _cabinet;
+            }
+            set
+            {
+                _cabinet = value;
+            }
+        }
 
         /// <summary>
         /// Возвращает и задаёт имя компьютера.
@@ -235,10 +252,11 @@ namespace Wpf_inv.Model
         /// <summary>
         /// Создает экземпляр класса <see cref="Computer"/>.
         /// </summary>
-        public Computer(string pcName, string pcModel, string inventoryNumber, string serialNumber,
+        public Computer(int cabinet, string pcName, string pcModel, string inventoryNumber, string serialNumber,
                         string ipAddress, int ramSize, int hddSize,
                         string motherboardModel, string cpuModel, string installedSoftware, Monitor monitor)
         {
+            Cabinet = cabinet;
             PCName = pcName;
             PCModel = pcModel;
             InventoryNumber = inventoryNumber;

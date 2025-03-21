@@ -44,11 +44,11 @@ namespace Wpf_inv
             string pcModel = PCModelTextBox.Text;
             string inventoryNumber = InventoryNumberTextBox.Text;
             string serialNumber = SerialNumberTextBox.Text;
-            string ipAddress = IPAddressTextBox.Text;
-            string cabinet = CabinetNumberTextBox.Text;
+            string ipAddress = IPAddressTextBox.Text;       
             string motherboardModel = MotherboardModelTextBox.Text;
             string cpuModel = CPUModelTextBox.Text;
             string installedSoftware = InstalledSoftwareTextBox.Text;
+            int cabinet;
             int ramSize;
             int hddSize;
             Model.Monitor monitor = new Model.Monitor(MonitorModelTextBox.Text, MonitorInventoryNumberTextBox.Text, MonitorSerialNumberTextBox.Text);
@@ -60,7 +60,13 @@ namespace Wpf_inv
                 return;
             }
 
-            Computer computer = new Computer(pcName, pcModel, inventoryNumber, serialNumber,
+            if (!int.TryParse(CabinetNumberTextBox.Text, out cabinet))
+            {
+                MessageBox.Show("Пожалуйста, введите корректные значения для номера кабинета.");
+                return;
+            }
+
+            Computer computer = new Computer(cabinet, pcName, pcModel, inventoryNumber, serialNumber,
                                               ipAddress, ramSize, hddSize,
                                               motherboardModel, cpuModel,
                                               installedSoftware, monitor);
@@ -84,6 +90,7 @@ namespace Wpf_inv
         private void ClearInputFields()
         {
             // Очищаем или сбрасываем значения в полях ввода
+            CabinetNumberTextBox.Clear();
             PCNameTextBox.Clear();
             PCModelTextBox.Clear();
             InventoryNumberTextBox.Clear();
@@ -103,6 +110,7 @@ namespace Wpf_inv
         {
             if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
             {
+                CabinetNumberTextBox.Text = selectedComputer.Cabinet.ToString();
                 PCNameTextBox.Text = selectedComputer.PCName;
                 PCModelTextBox.Text = selectedComputer.PCModel;
                 InventoryNumberTextBox.Text = selectedComputer.InventoryNumber;
@@ -125,6 +133,7 @@ namespace Wpf_inv
             if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
             {
                 // Обновляем свойства выбранного компьютера
+                selectedComputer.Cabinet = int.TryParse(RAMSizeTextBox.Text, out int cabinet) ? cabinet : 0;
                 selectedComputer.PCName = PCNameTextBox.Text;
                 selectedComputer.PCModel = PCModelTextBox.Text;
                 selectedComputer.InventoryNumber = InventoryNumberTextBox.Text;
