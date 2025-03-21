@@ -10,7 +10,7 @@
                 <StackPanel Margin="10">
                     <TextBlock Text="Список всего оборудования:" FontWeight="Bold" Margin="0,0,0,10"/>
                     <DockPanel>
-                        <ListView Name="AllEquipmentListView" SelectionChanged="AllEquipmentListView_SelectionChanged" Width="200" >
+                        <ListView Name="AllEquipmentListView" SelectionChanged="AllEquipmentListView_SelectionChanged" Width="400" >
                         </ListView>
 
                         <StackPanel Margin="10">
