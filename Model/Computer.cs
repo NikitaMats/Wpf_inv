@@ -1,70 +1,73 @@
 ﻿namespace Wpf_inv.Model
 {
     /// <summary>
-    /// Класс отвечающий за хранение данных о компьютерах.
+    /// The class responsible for storing data about computers.
     /// </summary>
     class Computer
     {
         /// <summary>
-        /// Номер кабинета в котором установлен ПК.
+        /// The number of the office in which the PC is installed.
         /// </summary>
         private int _cabinet;
 
         /// <summary>
-        /// Имя компьютера.
+        /// Computer name.
         /// </summary>
         private string _pcName;
 
         /// <summary>
-        /// Модель компьютера.
+        /// Computer model.
         /// </summary>
         private string _pcModel;
 
         /// <summary>
-        /// Инвентаризационный номер компьютера.
+        /// Computer inventory number.
         /// </summary>
         private string _inventoryNumber;
 
         /// <summary>
-        /// Серийный номер компьютера.
+        /// Computer serial number.
         /// </summary>
         private string _serialNumber;
 
         /// <summary>
-        /// IP адрес компьютера.
+        /// Computer IP address.
         /// </summary>
         private string _ipAddress;
 
         /// <summary>
-        /// Объем оперативной памяти компьютера. Указывается в гигабайтах.
+        /// The amount of RAM in a computer. Specified in gigabytes.
         /// </summary>
         private int _ramSize;
 
         /// <summary>
-        /// Объем памяти компьютера. Указывается в гигабайтах.
+        /// The amount of computer memory. Specified in gigabytes.
         /// </summary>
         private int _hddSize;
 
         /// <summary>
-        /// Модель материнской платы компьютера.
+        /// Computer motherboard model.
         /// </summary>
         private string _motherboardMode;
 
         /// <summary>
-        /// Модель процессора компьютера.
+        /// Computer processor model.
         /// </summary>
         private string _cpuModel;
 
         /// <summary>
-        /// Список установленного ПО на компьютере.
+        /// List of software installed on the computer.
         /// </summary>
         private string _installedSoftware;
 
         /// <summary>
-        /// Экземпляр класса <see cref="Monitor"/>.
+        /// Class instance <see cref="Monitor"/>.
         /// </summary>
         private Monitor _monitor;
 
+        /// <summary>
+        /// Returns and sets the office number.
+        /// </summary>
         public int Cabinet
         {
             get
@@ -78,7 +81,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт имя компьютера.
+        /// Gets and sets the computer name.
         /// </summary>
         public string PCName
         {
@@ -93,7 +96,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт модель компьютера.
+        /// Returns and sets the computer model.
         /// </summary>
         public string PCModel
         {
@@ -108,7 +111,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт инвентаризационный номер компьютера.
+        /// Returns and sets the inventory number of the computer.
         /// </summary>
         public string InventoryNumber
         {
@@ -123,7 +126,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт серийный номер компьютера.
+        /// Returns and sets the serial number of the computer.
         /// </summary>
         public string SerialNumber
         {
@@ -138,7 +141,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт IP адрес компьютера.
+        /// Returns and sets the IP address of the computer.
         /// </summary>
         public string IPAddress
         {
@@ -153,7 +156,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт оперативной объем памяти компьютера. Указывается в гигабайтах.
+        /// Returns and sets the computer's RAM capacity. Specified in gigabytes.
         /// </summary>
         public int RAMSize
         {
@@ -168,7 +171,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт объем памяти компьютера. Указывается в гигабайтах.
+        /// Returns and sets the amount of computer memory. Specified in gigabytes.
         /// </summary>
         public int HDDSize
         {
@@ -183,7 +186,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт модель материнской платы компьютера.
+        /// Returns and sets the computer's motherboard model.
         /// </summary>
         public string MotherboardModel
         {
@@ -198,7 +201,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт модель процессора компьютера.
+        /// Returns and sets the computer's processor model.
         /// </summary>
         public string CPUModel
         {
@@ -213,7 +216,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт список установленного ПО (например, перечисленный через запятую).
+        /// Returns and sets a list of installed software (e.g., comma-separated list).
         /// </summary>
         public string InstalledSoftware
         {
@@ -228,7 +231,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт монитор компьютера. Требует экземпляр класса <see cref="Monitor"/>.
+        /// Gets and sets the computer monitor. Requires an instance of the class <see cref="Monitor"/>.
         /// </summary>
         public Monitor Monitor
         {
@@ -243,7 +246,7 @@
         }
 
         /// <summary>
-        /// Создает экземпляр класса <see cref="Computer"/>.
+        /// Creates an instance of a class <see cref="Computer"/>.
         /// </summary>
         public Computer(int cabinet, string pcName, string pcModel, string inventoryNumber, string serialNumber,
                         string ipAddress, int ramSize, int hddSize,
@@ -263,6 +266,10 @@
             Monitor = monitor;
         }
 
+        /// <summary>
+        /// Method called to get the Computer description string.
+        /// </summary>
+        /// <returns>Line.</returns>
         public override string ToString()
         {
             return $"{PCName} - {PCModel} (Инв. номер: {InventoryNumber})";

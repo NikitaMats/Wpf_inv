@@ -1,27 +1,27 @@
 ﻿namespace Wpf_inv.Model
 {
     /// <summary>
-    /// Класс отвечающий за хранение данных о мониторах.
+    /// The class responsible for storing data about monitors.
     /// </summary>
     internal class Monitor
     {
         /// <summary>
-        /// Модель монитора.
+        /// Monitor model.
         /// </summary>
         private string _model;
 
         /// <summary>
-        /// Инвентаризационный номер монитора.
+        /// Monitor inventory number.
         /// </summary>
         private string _inventoryNumber;
 
         /// <summary>
-        /// Серийный номер монитора.
+        /// Serial number of the monitor.
         /// </summary>
         private string _serialNumber;
 
         /// <summary>
-        /// Возвращает и задаёт модель монитора.
+        /// Gets and sets the monitor model.
         /// </summary>
         public string Model
         {
@@ -36,7 +36,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт инвентаризационный номер монитора.
+        /// Returns and sets the inventories number of the monitor.
         /// </summary>
         public string InventoryNumber
         {
@@ -51,7 +51,7 @@
         }
 
         /// <summary>
-        /// Возвращает и задаёт серийный номер монитора.
+        /// Returns and sets the serial number of the monitor.
         /// </summary>
         public string SerialNumber
         {
@@ -66,7 +66,7 @@
         }
 
         /// <summary>
-        /// Создаёт экземпляр класса <see cref="Monitor"/>.
+        /// Creates an instance of a class <see cref="Monitor"/>.
         /// </summary>
         public Monitor(string model, string inventoryNumber, string serialNumber)
         {
