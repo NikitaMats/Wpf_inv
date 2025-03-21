@@ -129,7 +129,7 @@ namespace Wpf_inv
             if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
             {
                 // Обновляем свойства выбранного компьютера
-                selectedComputer.Cabinet = int.TryParse(RAMSizeTextBox.Text, out int cabinet) ? cabinet : 0;
+                selectedComputer.Cabinet = int.TryParse(CabinetNumberTextBox.Text, out int cabinet) ? cabinet : 0;
                 selectedComputer.PCName = PCNameTextBox.Text;
                 selectedComputer.PCModel = PCModelTextBox.Text;
                 selectedComputer.InventoryNumber = InventoryNumberTextBox.Text;
