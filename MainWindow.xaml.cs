@@ -11,7 +11,7 @@ namespace Wpf_inv
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// Хранит список устройств.
+        /// Stores a list of devices.
         /// </summary>
         private List<Computer> _computers = [];
 
@@ -34,11 +34,10 @@ namespace Wpf_inv
         }
 
         /// <summary>
-        /// Отвечает за обработку нажатия на кнопку сохранения.
+        /// Responsible for processing clicks on the save button.
         /// </summary>
         private void AddEquipmentButton_Click(object sender, RoutedEventArgs e)
         {
-            // Считываем данные из полей ввода
             string pcName = PCNameTextBox.Text;
             string pcModel = PCModelTextBox.Text;
             string inventoryNumber = InventoryNumberTextBox.Text;
@@ -49,7 +48,6 @@ namespace Wpf_inv
             string installedSoftware = InstalledSoftwareTextBox.Text;
             Model.Monitor monitor = new(MonitorModelTextBox.Text, MonitorInventoryNumberTextBox.Text, MonitorSerialNumberTextBox.Text);
 
-            // Пробуем преобразовать значение объема оперативной памяти и жесткого диска в целые числа
             if (!int.TryParse(RAMSizeTextBox.Text, out int ramSize) || !int.TryParse(HDDSizeTextBox.Text, out int hddSize))
             {
                 MessageBox.Show("Пожалуйста, введите корректные значения для объема оперативной памяти и жесткого диска.");
@@ -67,25 +65,20 @@ namespace Wpf_inv
                                               motherboardModel, cpuModel,
                                               installedSoftware, monitor);
 
-            // Добавляем новый компьютер в список
             _computers.Add(computer);
 
-            // Добавляем информацию о компьютере в ListBox
             AllEquipmentListView.Items.Add(computer);
 
-            // Очищаем поля ввода после сохранения
             ClearInputFields();
 
-            // Сообщение об успешном сохранении
             MessageBox.Show("Устройство успешно сохранено!");
         }
 
         /// <summary>
-        /// Метод отвечающий за очистку текстовых полей.
+        /// The method responsible for clearing text fields.
         /// </summary>
         private void ClearInputFields()
         {
-            // Очищаем или сбрасываем значения в полях ввода
             CabinetNumberTextBox.Clear();
             PCNameTextBox.Clear();
             PCModelTextBox.Clear();
@@ -102,6 +95,9 @@ namespace Wpf_inv
             MonitorSerialNumberTextBox.Clear();
         }
 
+        /// <summary>
+        /// The function is responsible for handling the change of the selected element in the ListView.
+        /// </summary>
         private void AllEquipmentListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
@@ -123,12 +119,13 @@ namespace Wpf_inv
             }
         }
 
+        /// <summary>
+        /// The function is responsible for processing clicks on the save button.
+        /// </summary>
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, выбран ли элемент в ListView
             if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
             {
-                // Обновляем свойства выбранного компьютера
                 selectedComputer.Cabinet = int.TryParse(CabinetNumberTextBox.Text, out int cabinet) ? cabinet : 0;
                 selectedComputer.PCName = PCNameTextBox.Text;
                 selectedComputer.PCModel = PCModelTextBox.Text;
@@ -144,7 +141,6 @@ namespace Wpf_inv
                 selectedComputer.Monitor.InventoryNumber = MonitorInventoryNumberTextBox.Text;
                 selectedComputer.Monitor.SerialNumber = MonitorSerialNumberTextBox.Text;
 
-                // Обновляем отображение в ListView
                 AllEquipmentListView.Items.Refresh();
             }
             else
@@ -153,6 +149,9 @@ namespace Wpf_inv
             }
         }
 
+        /// <summary>
+        /// The function is responsible for processing clicks on the delete button.
+        /// </summary>
         private void DeleteEquipmentButton_Click(object sender, RoutedEventArgs e)
         {
             if (AllEquipmentListView.SelectedItem is Computer selectedComputer)
@@ -169,15 +168,19 @@ namespace Wpf_inv
             }
         }
 
+        /// <summary>
+        /// The function is responsible for processing clicks on the filter button.
+        /// </summary>
         private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            // Фильтруем объекты с полями, равными 0
             var filteredComputers = Filtration.FilterObjectsWithZeroFields(_computers);
 
-            // Обновляем ListView
             FilteredListView.ItemsSource = filteredComputers;
         }
 
+        /// <summary>
+        /// The function is responsible for processing the click on the search button.
+        /// </summary>
         private void SearchCabinetButton_Click(object sender, RoutedEventArgs e)
         {
             string cabinetNumber = SearchCabinetTextBox.Text;
@@ -188,15 +191,13 @@ namespace Wpf_inv
                 return;
             }
 
-            // Фильтруем объекты по номеру кабинета
             var filteredComputers = _computers.Where(c => c.Cabinet.ToString() == cabinetNumber).ToList();
 
-            // Обновляем ListView
             FilteredListView.ItemsSource = filteredComputers;
         }
 
         /// <summary>
-        /// Функция срабатывающая при закрытии формы. Отвечает за сохранение данных.
+        /// Function triggered when the form is closed. Responsible for saving data.
         /// </summary>
         private void MainForm_FormClosed(object sender, System.ComponentModel.CancelEventArgs e)
         {
