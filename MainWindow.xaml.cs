@@ -182,6 +182,23 @@ namespace Wpf_inv
             FilteredListView.ItemsSource = filteredComputers;
         }
 
+        private void SearchCabinetButton_Click(object sender, RoutedEventArgs e)
+        {
+            string cabinetNumber = SearchCabinetTextBox.Text;
+
+            if (string.IsNullOrEmpty(cabinetNumber))
+            {
+                MessageBox.Show("Введите номер кабинета.");
+                return;
+            }
+
+            // Фильтруем объекты по номеру кабинета
+            var filteredComputers = _computers.Where(c => c.Cabinet.ToString() == cabinetNumber).ToList();
+
+            // Обновляем ListView
+            FilteredListView.ItemsSource = filteredComputers;
+        }
+
         /// <summary>
         /// Функция срабатывающая при закрытии формы. Отвечает за сохранение данных.
         /// </summary>
