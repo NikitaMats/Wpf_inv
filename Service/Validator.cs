@@ -9,13 +9,13 @@ namespace Wpf_inv.Service
     internal class Validator
     {
         /// <summary>
-        /// Проверяет, что количество символов в строке находится в нужном диапазоне.
+        /// Checks that the number of characters in a string is within the specified range.
         /// </summary>
-        /// <param name="FunctionName">Имя свойства, откуда был вызван метод.</param>
-        /// <param name="min">Минимальное значение.</param>
-        /// <param name="max">Максимальное значение.</param>
-        /// <param name="value">Строка.</param>
-        /// <exception cref="ArgumentException">Выбрасывается, когда количество символов строки не входит в диапазон.</exception>
+        /// <param name="FunctionName">The name of the property from which the method was called.</param>
+        /// <param name="min">Minimum value.</param>
+        /// <param name="max">Maximum value.</param>
+        /// <param name="value">Line.</param>
+        /// <exception cref="ArgumentException">Thrown when the number of characters in a string is out of range.</exception>
         public static void AssertCountSymbolsInRange(string FunctionName, int min, int max, string value)
         {
             if (!(value.Length >= min && value.Length <= max))
@@ -24,10 +24,10 @@ namespace Wpf_inv.Service
         }
 
         /// <summary>
-        /// Проверяет строку на соответствие IPv4.
+        /// Checks if a string is IPv4 compliant.
         /// </summary>
-        /// <param name="ipAddress">Строка.</param>
-        /// <exception cref="ArgumentException">Выбрасывается, когда строка не соответсвует IPv4.</exception>
+        /// <param name="ipAddress">Line.</param>
+        /// <exception cref="ArgumentException">Thrown when a string is not IPv4 compliant.</exception>
         public bool IsValidIPv4(string ipAddress)
         {
             if (string.IsNullOrEmpty(ipAddress))
