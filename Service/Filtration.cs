@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using Wpf_inv.Model;
 
 namespace Wpf_inv.Service
@@ -18,7 +12,7 @@ namespace Wpf_inv.Service
         /// <returns>List of objects containing fields with value 0.</returns>
         public static List<Computer> FilterObjectsWithZeroFields(List<Computer> computers)
         {
-            List<Computer> result = new List<Computer>();
+            List<Computer> result = [];
 
             foreach (var computer in computers)
             {

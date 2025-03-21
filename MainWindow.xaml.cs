@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using Wpf_inv.Model;
 using Wpf_inv.Service;
@@ -14,7 +13,7 @@ namespace Wpf_inv
         /// <summary>
         /// Хранит список устройств.
         /// </summary>
-        private List<Computer> _computers = new List<Computer>();
+        private List<Computer> _computers = [];
 
         public MainWindow()
         {
@@ -30,7 +29,7 @@ namespace Wpf_inv
             }
             catch
             {
-                _computers = new List<Computer>();
+                _computers = [];
             }
         }
 
@@ -48,25 +47,22 @@ namespace Wpf_inv
             string motherboardModel = MotherboardModelTextBox.Text;
             string cpuModel = CPUModelTextBox.Text;
             string installedSoftware = InstalledSoftwareTextBox.Text;
-            int cabinet;
-            int ramSize;
-            int hddSize;
-            Model.Monitor monitor = new Model.Monitor(MonitorModelTextBox.Text, MonitorInventoryNumberTextBox.Text, MonitorSerialNumberTextBox.Text);
+            Model.Monitor monitor = new(MonitorModelTextBox.Text, MonitorInventoryNumberTextBox.Text, MonitorSerialNumberTextBox.Text);
 
             // Пробуем преобразовать значение объема оперативной памяти и жесткого диска в целые числа
-            if (!int.TryParse(RAMSizeTextBox.Text, out ramSize) || !int.TryParse(HDDSizeTextBox.Text, out hddSize))
+            if (!int.TryParse(RAMSizeTextBox.Text, out int ramSize) || !int.TryParse(HDDSizeTextBox.Text, out int hddSize))
             {
                 MessageBox.Show("Пожалуйста, введите корректные значения для объема оперативной памяти и жесткого диска.");
                 return;
             }
 
-            if (!int.TryParse(CabinetNumberTextBox.Text, out cabinet))
+            if (!int.TryParse(CabinetNumberTextBox.Text, out int cabinet))
             {
                 MessageBox.Show("Пожалуйста, введите корректные значения для номера кабинета.");
                 return;
             }
 
-            Computer computer = new Computer(cabinet, pcName, pcModel, inventoryNumber, serialNumber,
+            Computer computer = new(cabinet, pcName, pcModel, inventoryNumber, serialNumber,
                                               ipAddress, ramSize, hddSize,
                                               motherboardModel, cpuModel,
                                               installedSoftware, monitor);

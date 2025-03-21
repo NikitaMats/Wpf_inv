@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wpf_inv.Service
+﻿namespace Wpf_inv.Service
 {
     internal class Validator
     {
@@ -28,7 +22,7 @@ namespace Wpf_inv.Service
         /// </summary>
         /// <param name="ipAddress">Line.</param>
         /// <exception cref="ArgumentException">Thrown when a string is not IPv4 compliant.</exception>
-        public bool IsValidIPv4(string ipAddress)
+        public static bool IsValidIPv4(string ipAddress)
         {
             if (string.IsNullOrEmpty(ipAddress))
                 throw new ArgumentException("The line must not be empty.");
