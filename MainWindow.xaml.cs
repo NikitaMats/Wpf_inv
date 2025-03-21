@@ -173,6 +173,15 @@ namespace Wpf_inv
             }
         }
 
+        private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Фильтруем объекты с полями, равными 0
+            var filteredComputers = Filtration.FilterObjectsWithZeroFields(_computers);
+
+            // Обновляем ListView
+            FilteredListView.ItemsSource = filteredComputers;
+        }
+
         /// <summary>
         /// Функция срабатывающая при закрытии формы. Отвечает за сохранение данных.
         /// </summary>

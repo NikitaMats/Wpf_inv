@@ -16,7 +16,7 @@ namespace Wpf_inv.Service
         /// </summary>
         /// <param name="computers">List of objects to be checked.</param>
         /// <returns>List of objects containing fields with value 0.</returns>
-        public List<Computer> FilterObjectsWithZeroFields(List<Computer> computers)
+        public static List<Computer> FilterObjectsWithZeroFields(List<Computer> computers)
         {
             List<Computer> result = new List<Computer>();
 
