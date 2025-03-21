@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.IO;
-using System.Text.Json.Nodes;
 using Wpf_inv.Model;
-using System.Collections;
 
 namespace Wpf_inv.Service
 {
     /// <summary>
-    /// Класс отвечающий за запись данных в файл.
+    /// The class responsible for writing data to a file.
     /// </summary>
     internal class Serializer
     {
         /// <summary>
-        /// Путь к системной папке AppData.
+        /// Path to the system AppData folder.
         /// </summary>
         private static string DataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\inv.txt";
 
         /// <summary>
-        /// Метод отвечающий за загрузку данных из файла.
+        /// The method responsible for loading data from a file.
         /// </summary>
-        /// <returns>Список объектов класса <see cref="Computer"/>.</returns>
+        /// <returns>List of class objects.<see cref="Computer"/>.</returns>
         public static List<Computer> LoadData()
         {
             StreamReader sr = new StreamReader(DataPath);
@@ -32,9 +28,9 @@ namespace Wpf_inv.Service
         }
 
         /// <summary>
-        /// Метод отвечающий за запись данных в файла.
+        /// The method responsible for writing data to a file.
         /// </summary>
-        /// <param name="computer"> Список объектов класса <see cref="Computer"/> для записи.</param>
+        /// <param name="computer">List of class objects.<see cref="Computer"/> для записи.</param>
         public static void WriteData(List<Computer> computer)
         {
             var jsonObject = JsonConvert.SerializeObject(computer);
